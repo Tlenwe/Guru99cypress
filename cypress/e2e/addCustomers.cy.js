@@ -34,7 +34,8 @@ describe('Add Customer +', function () {
         cy.addCustomersSuccessCheck()
 
         cy.log('Checking Pending radiobutton')
-        cy.get('input#pending').check({ force: true })
+        cy.get('input#pending')
+            .check({ force: true })
         cy.addCustomerFillFields('Jack', 'Jackson', 'jackie@mail.com', '9550 Broadway, HARROW HA62 8ZD', '+447975777666')
         cy.addCustomersLabels()
         cy.get('input[type="submit"]').click()
@@ -71,8 +72,12 @@ describe('Add Customer +', function () {
         cy.get('input#pending').check({ force: true })
         cy.addCustomerFillFields('Jack', 'Jackson', 'jackie@mail.com', '9550 Broadway HARROW HA62 8ZD', '+447975777666')
         cy.get('input[type="reset"]').click()
-        cy.get('input#done').should('be.checked')
-        cy.get('input[type="submit"]').click().should(() => {expect(checker, 'Checking the required pop-up to appear.').to.be.true;})
+        cy.get('input#done')
+            .should('be.checked')
+        cy.get('input[type="submit"]').click()
+            .should(() => {
+                expect(checker, 'Checking the required pop-up to appear.').to.be.true
+            })
 
     });
 
@@ -104,16 +109,20 @@ describe('Add Customer -', function () {
 
         cy.get('input#done').check({ force: true })
         cy.addCustomerFillFields('Jack', 'Jackson', 'validmail@mail.com', '9550 Broadway HARROW HA62 8ZD', '+447975777666')
-        cy.get('label#message9').should('not.be.visible')
+        cy.get('label#message9')
+            .should('not.be.visible')
 
         cy.addCustomerFillFields('Jack', 'Jackson', 'mailwithoutat', '9550 Broadway HARROW HA62 8ZD', '+447975777666')
-        cy.get('label#message9').should('be.visible').and('have.text', 'Email-ID is not valid')
+        cy.get('label#message9')
+            .should('be.visible').and('have.text', 'Email-ID is not valid')
 
         cy.addCustomerFillFields('Jack', 'Jackson', 'mailonlywith@', '9550 Broadway HARROW HA62 8ZD', '+447975777666')
-        cy.get('label#message9').should('be.visible').and('have.text', 'Email-ID is not valid')
+        cy.get('label#message9')
+            .should('be.visible').and('have.text', 'Email-ID is not valid')
 
         cy.addCustomerFillFields('Jack', 'Jackson', 'mailwith@anddot.', '9550 Broadway HARROW HA62 8ZD', '+447975777666')
-        cy.get('label#message9').should('be.visible').and('have.text', 'Email-ID is not valid')
+        cy.get('label#message9')
+            .should('be.visible').and('have.text', 'Email-ID is not valid')
     });
 
     it('Checking field validation', function () {
@@ -123,20 +132,30 @@ describe('Add Customer -', function () {
 
         cy.get('input#done').check({ force: true })
         cy.addCustomerPopUpCheck('$#@', '$#@', '$##@mail.com', '$#@', '$#@', checker)
-        cy.get('label#message').should('be.visible').and('have.text', 'Special characters are not allowed')
-        cy.get('label#message50').should('be.visible').and('have.text', 'Special characters are not allowed')
-        cy.get('label#message9').should('be.visible').and('have.text', 'Special characters are not allowed')
-        cy.get('label#message3').should('be.visible').and('have.text', 'Special characters are not allowed')
-        cy.get('label#message7').should('be.visible').and('have.text', 'Special characters are not allowed')
+        cy.get('label#message')
+            .should('be.visible').and('have.text', 'Special characters are not allowed')
+        cy.get('label#message50')
+            .should('be.visible').and('have.text', 'Special characters are not allowed')
+        cy.get('label#message9')
+            .should('be.visible').and('have.text', 'Special characters are not allowed')
+        cy.get('label#message3')
+            .should('be.visible').and('have.text', 'Special characters are not allowed')
+        cy.get('label#message7')
+            .should('be.visible').and('have.text', 'Special characters are not allowed')
 
         checker = false
         cy.get('input#done').check({ force: true })
         cy.addCustomerPopUpCheck('123', '123', '123@mail.com', '123', '123', checker)
-        cy.get('label#message').should('be.visible').and('have.text', 'Numbers are not allowed')
-        cy.get('label#message50').should('be.visible').and('have.text', 'Numbers are not allowed')
-        cy.get('label#message9').should('not.be.visible')
-        cy.get('label#message3').should('not.be.visible')
-        cy.get('label#message7').should('not.be.visible')
+        cy.get('label#message')
+            .should('be.visible').and('have.text', 'Numbers are not allowed')
+        cy.get('label#message50')
+            .should('be.visible').and('have.text', 'Numbers are not allowed')
+        cy.get('label#message9')
+            .should('not.be.visible')
+        cy.get('label#message3')
+            .should('not.be.visible')
+        cy.get('label#message7')
+            .should('not.be.visible')
 
         cy.get('input#done').check({ force: true })
         cy.get('input#fname').type(' ').clear()
@@ -145,12 +164,18 @@ describe('Add Customer -', function () {
         cy.get('textarea#message').type(' ').clear()
         cy.get('input#telephoneno').type(' ').clear()
         cy.wait(10)
+
         cy.get('input[type="submit"]').click()
-        cy.get('label#message').should('be.visible').and('have.text', 'Customer name must not be blank')
-        cy.get('label#message50').should('be.visible').and('have.text', 'Customer name must not be blank')
-        cy.get('label#message9').should('be.visible').and('have.text', 'Email-ID must not be blank')
-        cy.get('label#message3').should('be.visible').and('have.text', 'Address Field must not be blank')
-        cy.get('label#message7').should('be.visible').and('have.text', 'Mobile no must not be blank')
+        cy.get('label#message')
+            .should('be.visible').and('have.text', 'Customer name must not be blank')
+        cy.get('label#message50')
+            .should('be.visible').and('have.text', 'Customer name must not be blank')
+        cy.get('label#message9')
+            .should('be.visible').and('have.text', 'Email-ID must not be blank')
+        cy.get('label#message3')
+            .should('be.visible').and('have.text', 'Address Field must not be blank')
+        cy.get('label#message7')
+            .should('be.visible').and('have.text', 'Mobile no must not be blank')
     });
 
 });
